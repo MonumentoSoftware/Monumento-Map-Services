@@ -1,0 +1,134 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "map-service": {
+      "projectType": "library",
+      "root": "projects/map-service",
+      "sourceRoot": "projects/map-service/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/map-service/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/map-service/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/map-service/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/map-service/src/test.ts",
+            "tsConfig": "projects/map-service/tsconfig.spec.json",
+            "karmaConfig": "projects/map-service/karma.conf.js"
+          }
+        }
+      }
+    },
+    "map-service-test": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/map-service-test",
+      "sourceRoot": "projects/map-service-test/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/map-service-test",
+            "index": "projects/map-service-test/src/index.html",
+            "main": "projects/map-service-test/src/main.ts",
+            "polyfills": "projects/map-service-test/src/polyfills.ts",
+            "tsConfig": "projects/map-service-test/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "projects/map-service-test/src/favicon.ico",
+              "projects/map-service-test/src/assets"
+            ],
+            "styles": ["projects/map-service-test/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "projects/map-service-test/src/environments/environment.ts",
+                  "with": "projects/map-service-test/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "map-service-test:build:production"
+            },
+            "development": {
+              "browserTarget": "map-service-test:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "map-service-test:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/map-service-test/src/test.ts",
+            "polyfills": "projects/map-service-test/src/polyfills.ts",
+            "tsConfig": "projects/map-service-test/tsconfig.spec.json",
+            "karmaConfig": "projects/map-service-test/karma.conf.js",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "projects/map-service-test/src/favicon.ico",
+              "projects/map-service-test/src/assets"
+            ],
+            "styles": ["projects/map-service-test/src/styles.scss"],
+            "scripts": []
+          }
+        }
+      }
+    }
+  }
+}

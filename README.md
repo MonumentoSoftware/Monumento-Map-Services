@@ -1,27 +1,78 @@
-# MMapService
+# Monumento Angular Map Services
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.2.
+A simple set of tools to easily create maps on angular, and using the Ionic framework.
 
-## Development server
+## Table of Contents
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- [Intro]
+- [Install]
+- [Usage]
 
-## Code scaffolding
+## Intro
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+This project was born as a way to enable a faster development when using leaflet for angular.
+Specially if you are using a ui library as Ionic.
 
-## Build
+## Install
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Check the [Dependencies](#Dependencies)
+Run the command:
 
-## Running unit tests
+```sh
+npm i map-service-monumento
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Dependencies
 
-## Running end-to-end tests
+Install these packages:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+- leaflet
+- ngx-leaflet
 
-## Further help
+with the command:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```sh
+npm install leaflet
+npm install @asymmetrik/ngx-leaflet
+```
+
+If you intend to use this library in a typescript project (utilizing the typings),
+you'll need to install the leaflet typings:
+
+```sh
+npm install --save-dev @types/leaflet
+```
+
+## Usage
+
+a simple map on Angular 13:
+
+```ts
+@Component({
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.scss"],
+})
+export class AppComponent implements OnInit {
+  title = "map-service-test";
+  public map!: Map;
+
+  constructor(private mapService: MapGeneralService) {}
+  async ngOnInit() {
+    this.map = this.mapService.setupMap("map");
+    const tile = await this.mapService.getDefaultSateliteLayer();
+    tile.addTo(this.map);
+  }
+}
+```
+
+If you are using Ionic Framework, you need to set the map on the method ionViewWillEnter.
+Like this:
+
+```ts
+ async ionViewWillEnter() {
+    this.map = this.mapService.setupMap('map');
+    const tile = await this.mapService.getDefaultSateliteLayer();
+    tile.addTo(this.map);
+}
+```

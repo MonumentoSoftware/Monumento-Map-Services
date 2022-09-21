@@ -58,7 +58,10 @@
               "projects/map-service-test/src/favicon.ico",
               "projects/map-service-test/src/assets"
             ],
-            "styles": ["projects/map-service-test/src/styles.scss"],
+            "styles": [
+              "projects/map-service-test/src/styles.scss",
+              "./node_modules/leaflet/dist/leaflet.css"
+            ],
             "scripts": []
           },
           "configurations": {

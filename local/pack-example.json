@@ -1,0 +1,38 @@
+{
+  "name": "@monumentosoftware/monumento-map-service",
+  "version": "0.0.2",
+  "repository": {
+    "url": "https://github.com/monumentosoftware/monumento-map-services.git"
+  },
+  "keywords": ["Angular", "leaflet", "map", "services"],
+  "peerDependencies": {
+    "@angular/common": "^14.1.0",
+    "@angular/core": "^14.1.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "module": "fesm2015/map-service.mjs",
+  "es2020": "fesm2020/map-service.mjs",
+  "esm2020": "esm2020/map-service.mjs",
+  "fesm2020": "fesm2020/map-service.mjs",
+  "fesm2015": "fesm2015/map-service.mjs",
+  "typings": "index.d.ts",
+  "exports": {
+    "./package.json": {
+      "default": "./package.json"
+    },
+    ".": {
+      "types": "./index.d.ts",
+      "esm2020": "./esm2020/map-service.mjs",
+      "es2020": "./fesm2020/map-service.mjs",
+      "es2015": "./fesm2015/map-service.mjs",
+      "node": "./fesm2015/map-service.mjs",
+      "default": "./fesm2020/map-service.mjs"
+    }
+  },
+  "sideEffects": false,
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  }
+}

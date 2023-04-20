@@ -12,8 +12,8 @@ export class AppComponent implements OnInit {
   public map!: Map;
 
   constructor(private mapService: MapGeneralService) {}
+
   async ngOnInit() {
-    console.log('ssasa');
     this.map = this.mapService.setupMap('map');
     const tile = await this.mapService.getDefaultSateliteLayer();
     tile.addTo(this.map);
